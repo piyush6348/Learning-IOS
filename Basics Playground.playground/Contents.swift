@@ -20,3 +20,8 @@ let booleans: Bool = true
 let floatingPointNumber: Float = 1.3
 
 let double: Double = 3.14159265423
+
+let x:String = "abc"
+let y:String = "x"
+
+let z =    "\(y)"
