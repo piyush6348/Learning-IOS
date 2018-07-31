@@ -9,7 +9,7 @@
 import Foundation
 
 
-class ToDo2: Encodable{
+class ToDo2: Codable{
     var title: String = ""
     var done: Bool = false
 }

@@ -23,6 +23,7 @@ class ViewController: UITableViewController{
 //        if let items = defaults.array(forKey: "toDoList") as? [ToDo2] {
 //            itemArray = items
 //        }
+        loadData()
     }
     
     //MARK - TableView Datasource Methods
@@ -67,15 +68,7 @@ class ViewController: UITableViewController{
             todo.title = textEntered
             
             self.itemArray.append(todo)
-            
-            let encoder = PropertyListEncoder()
-            do{
-                let encodedData = try encoder.encode(self.itemArray)
-                try encodedData.write(to: self.dataFilePath!)
-            }catch{
-                print("Error encoding data")
-            }
-            self.tableView.reloadData()
+            self.saveData()
         }
         
         alert.addTextField { (textField) in
@@ -86,5 +79,29 @@ class ViewController: UITableViewController{
         present(alert, animated: true, completion: nil)
     }
     
+    // MARK :- Encoding and Decoding
+    
+    func saveData(){
+        let encoder = PropertyListEncoder()
+        do{
+            let encodedData = try encoder.encode(self.itemArray)
+            try encodedData.write(to: self.dataFilePath!)
+        }catch{
+            print("Error encoding data")
+        }
+        self.tableView.reloadData()
+    }
+    
+    func loadData(){
+        if let data = try?Data(contentsOf: dataFilePath!){
+            let decoder = PropertyListDecoder()
+            
+            do{
+                itemArray = try decoder.decode([ToDo2].self, from: data)
+            }catch{
+                print("Error decoding item array")
+            }
+        }
+    }
 }
 
