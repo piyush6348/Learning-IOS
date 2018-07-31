@@ -10,17 +10,34 @@ import UIKit
 
 class ViewController: UITableViewController{
     
-    var itemArray = ["ABC", "DEF", "GHI"]
+    // Instance variables
+    var itemArray: [ToDo2] = [ToDo2]()
+//    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    // shared prefs
+    let defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        if let items = defaults.array(forKey: "toDoList") as? [ToDo2] {
+            itemArray = items
+        }
     }
     
     //MARK - TableView Datasource Methods
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "toDoItemCellIdentifier", for: indexPath)
-        cell.textLabel?.text = itemArray[indexPath.row]
+        let item = itemArray[indexPath.row]
+        cell.textLabel?.text = item.title
+        
+        if(item.done){
+            cell.accessoryType = .checkmark
+        }
+        else{
+            cell.accessoryType = .none
+        }
         return cell
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -31,12 +48,8 @@ class ViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        
-        if( tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark){
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        }else{
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -50,7 +63,11 @@ class ViewController: UITableViewController{
             print("Hey " + alert.textFields![0].text!)
             
             let textEntered = alert.textFields![0].text!
-            self.itemArray.append(textEntered)
+            let todo = ToDo2()
+            todo.title = textEntered
+            
+            self.itemArray.append(todo)
+            self.defaults.set(self.itemArray, forKey: "toDoList")
             self.tableView.reloadData()
         }
         
