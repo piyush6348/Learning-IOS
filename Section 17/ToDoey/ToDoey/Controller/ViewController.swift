@@ -12,17 +12,17 @@ class ViewController: UITableViewController{
     
     // Instance variables
     var itemArray: [ToDo2] = [ToDo2]()
-//    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
-    // shared prefs
-    let defaults = UserDefaults.standard
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+     //shared prefs
+    // let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        if let items = defaults.array(forKey: "toDoList") as? [ToDo2] {
-            itemArray = items
-        }
+//        if let items = defaults.array(forKey: "toDoList") as? [ToDo2] {
+//            itemArray = items
+//        }
     }
     
     //MARK - TableView Datasource Methods
@@ -67,7 +67,14 @@ class ViewController: UITableViewController{
             todo.title = textEntered
             
             self.itemArray.append(todo)
-            self.defaults.set(self.itemArray, forKey: "toDoList")
+            
+            let encoder = PropertyListEncoder()
+            do{
+                let encodedData = try encoder.encode(self.itemArray)
+                try encodedData.write(to: self.dataFilePath!)
+            }catch{
+                print("Error encoding data")
+            }
             self.tableView.reloadData()
         }
         
