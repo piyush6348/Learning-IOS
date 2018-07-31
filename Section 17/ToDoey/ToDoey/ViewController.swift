@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UITableViewController{
     
-    let itemArray = ["ABC", "DEF", "GHI"]
+    var itemArray = ["ABC", "DEF", "GHI"]
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -39,5 +39,28 @@ class ViewController: UITableViewController{
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    //MARK - Add new Items
+    
+    @IBAction func AddBtnClicked(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Add Todoey", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            print("Success")
+            print("Hey " + alert.textFields![0].text!)
+            
+            let textEntered = alert.textFields![0].text!
+            self.itemArray.append(textEntered)
+            self.tableView.reloadData()
+        }
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter some text"
+            print(textField.text!)
+        }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
