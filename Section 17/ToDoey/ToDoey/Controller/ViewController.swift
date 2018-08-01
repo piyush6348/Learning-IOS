@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UITableViewController{
     
@@ -17,7 +18,9 @@ class ViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // getting location of our db
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        loadData()
     }
     
     //MARK - TableView Datasource Methods
@@ -83,17 +86,15 @@ class ViewController: UITableViewController{
         }
         self.tableView.reloadData()
     }
-//
-//    func loadData(){
-//        if let data = try?Data(contentsOf: dataFilePath!){
-//            let decoder = PropertyListDecoder()
-//
-//            do{
-//                itemArray = try decoder.decode([ToDo2].self, from: data)
-//            }catch{
-//                print("Error decoding item array")
-//            }
-//        }
-//    }
+
+    func loadData(){
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        do{
+            itemArray = try context.fetch(request)
+            tableView.reloadData()
+        }catch{
+            print("Error while loading data \(error)")
+        }
+    }
 }
 
