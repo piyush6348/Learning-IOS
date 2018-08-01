@@ -14,6 +14,7 @@
 		07321F2221106866008D9C7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07321F2021106866008D9C7D /* LaunchScreen.storyboard */; };
 		07321F302110BD36008D9C7D /* ToDo2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07321F2F2110BD36008D9C7D /* ToDo2.swift */; };
 		07321F5421116D6E008D9C7D /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07321F5221116D6E008D9C7D /* CoreDataModel.xcdatamodeld */; };
+		07321F562111A83B008D9C7D /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07321F552111A83B008D9C7D /* CategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		07321F2321106866008D9C7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07321F2F2110BD36008D9C7D /* ToDo2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo2.swift; sourceTree = "<group>"; };
 		07321F5321116D6E008D9C7D /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		07321F552111A83B008D9C7D /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				07321F1921106864008D9C7D /* ViewController.swift */,
+				07321F552111A83B008D9C7D /* CategoryViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07321F562111A83B008D9C7D /* CategoryViewController.swift in Sources */,
 				07321F1A21106864008D9C7D /* ViewController.swift in Sources */,
 				07321F302110BD36008D9C7D /* ToDo2.swift in Sources */,
 				07321F5421116D6E008D9C7D /* CoreDataModel.xcdatamodeld in Sources */,

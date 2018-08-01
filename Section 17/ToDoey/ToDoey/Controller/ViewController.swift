@@ -14,13 +14,19 @@ class ViewController: UITableViewController{
     // Instance variables
     var itemArray: [Item] = [Item]()
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    var selectedCategory: Category? {
+        didSet{
+            loadData()
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // getting location of our db
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        loadData()
+        //loadData()
     }
     
     //MARK - TableView Datasource Methods
@@ -70,6 +76,7 @@ class ViewController: UITableViewController{
             let textEntered = alert.textFields![0].text!
             let item = Item(context: self.context)
             item.titlle = textEntered
+            item.parentCategory = self.selectedCategory
             
             self.itemArray.append(item)
             self.saveData()
@@ -94,8 +101,18 @@ class ViewController: UITableViewController{
         self.tableView.reloadData()
     }
 
-    func loadData(){
-        let request: NSFetchRequest<Item> = Item.fetchRequest()
+    func loadData(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil){
+        //let request: NSFetchRequest<Item> = Item.fetchRequest()
+        
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        
+        if let optionalPredicate = predicate{
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, optionalPredicate])
+        }
+        else{
+            request.predicate = categoryPredicate
+        }
         do{
             itemArray = try context.fetch(request)
             tableView.reloadData()
@@ -109,7 +126,24 @@ class ViewController: UITableViewController{
 extension ViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let request: NSFetchRequest<Item> = Item.fetchRequest()
-        print(searchBar.text!)
+        
+        //print(searchBar.text!)
+        
+        let predicate = NSPredicate(format: "titlle CONTAINS[cd] %@", searchBar.text!)
+        request.predicate = predicate
+        
+        let sortDescriptor = NSSortDescriptor(key: "titlle", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        loadData(with: request, predicate: predicate)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if (searchBar.text?.count == 0){
+            loadData()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
     }
 }
 
