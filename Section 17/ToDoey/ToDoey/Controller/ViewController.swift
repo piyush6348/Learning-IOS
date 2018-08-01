@@ -38,6 +38,7 @@ class ViewController: UITableViewController{
         }
         return cell
     }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
     }
@@ -46,9 +47,15 @@ class ViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
-        tableView.reloadData()
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Delete data
+            context.delete(itemArray[indexPath.row])
+            itemArray.remove(at: indexPath.row)
+            saveData()
+        // -----------
+//            itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+//            saveData()
+//            tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //MARK - Add new Items
@@ -95,6 +102,14 @@ class ViewController: UITableViewController{
         }catch{
             print("Error while loading data \(error)")
         }
+    }
+}
+
+//MARK: - Search Bar methods
+extension ViewController: UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        print(searchBar.text!)
     }
 }
 
