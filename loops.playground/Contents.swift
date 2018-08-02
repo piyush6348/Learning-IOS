@@ -39,3 +39,12 @@ func abc(){
     }
 }
 */
+
+
+class abc{
+    static func fun(){
+        print("Hey")
+    }
+}
+
+abc.fun()
