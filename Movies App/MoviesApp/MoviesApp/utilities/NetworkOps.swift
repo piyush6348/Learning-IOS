@@ -15,14 +15,17 @@ class NetworkOps{
     
     var dataTask: URLSessionDataTask?
     
-    func getData(searchTitle: String, completion: @escaping (Data?, URLResponse?, Error?) ->() ){
+    func getData(searchTitle: String="", byId: Bool = false,imdbID: String = "", completion: @escaping (Data?, URLResponse?, Error?) ->() ){
         print("function called")
         
         dataTask?.cancel()
         
         if var urlComponents = URLComponents(string: Constants.OMDB_BASE_URL){
-            urlComponents.query = "\(Constants.PARAM_STRING)=\(searchTitle)&\(Constants.PARAM_API_KEY)=\(Constants.OMDB_API_KEY)"
-            
+            if(byId){
+                urlComponents.query = "\(Constants.PARAM_ID)=\(imdbID)&\(Constants.PARAM_API_KEY)=\(Constants.OMDB_API_KEY)"
+            }else{
+                urlComponents.query = "\(Constants.PARAM_STRING)=\(searchTitle)&\(Constants.PARAM_API_KEY)=\(Constants.OMDB_API_KEY)"
+            }
             print("A")
             
             if let url = urlComponents.url {

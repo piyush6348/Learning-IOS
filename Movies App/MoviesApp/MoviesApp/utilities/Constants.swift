@@ -14,6 +14,7 @@ class Constants {
     static let PARAM_TITLE = "t"
     static let PARAM_API_KEY = "apikey"
     static let PARAM_STRING = "s"
+    static let PARAM_ID = "i"
     static let TYPE_MOVIE = 1
     static let TYPE_SERIES = 2
     static let TYPE_EPISODE = 3
