@@ -9,24 +9,19 @@
 import Foundation
 import SwiftyJSON
 
-protocol NetworkOperationsDelegate {
-    func obtainedResult(json: JSON)
-    func obtainedError(error: Error)
-}
-
 class NetworkOps{
     
     let defaultSession = URLSession(configuration: .default)
     
     var dataTask: URLSessionDataTask?
     
-    func getData(searchTitle: String, delegate: NetworkOperationsDelegate){
+    func getData(searchTitle: String, completion: @escaping (Data?, URLResponse?, Error?) ->() ){
         print("function called")
         
         dataTask?.cancel()
         
         if var urlComponents = URLComponents(string: Constants.OMDB_BASE_URL){
-            urlComponents.query = "\(Constants.PARAM_TITLE)=\(searchTitle)&\(Constants.PARAM_API_KEY)=\(Constants.OMDB_API_KEY)"
+            urlComponents.query = "\(Constants.PARAM_STRING)=\(searchTitle)&\(Constants.PARAM_API_KEY)=\(Constants.OMDB_API_KEY)"
             
             print("A")
             
@@ -40,19 +35,25 @@ class NetworkOps{
                     defer{
                         self.dataTask = nil
                     }
-                    if(error != nil){
-                        delegate.obtainedError(error: error!)
-                    }else{
-                        if let dataFetched = data {
-                            let responseObtained = response as? HTTPURLResponse
-                            
-                            if(responseObtained?.statusCode == 200){
-                                
-                                let json = JSON(dataFetched)
-                                delegate.obtainedResult(json: json)
-                            }
-                        }
-                    }
+                    
+                    completion(data, response, error)
+                    
+//                    print("C")
+//                    defer{
+//                        self.dataTask = nil
+//                    }
+//                    if(error != nil){
+//
+//                    }else{
+//                        if let dataFetched = data {
+//                            let responseObtained = response as? HTTPURLResponse
+//
+//                            if(responseObtained?.statusCode == 200){
+//
+//                                let json = JSON(dataFetched)
+//                            }
+//                        }
+//                    }
                 })
             }
         }
