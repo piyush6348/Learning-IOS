@@ -9,7 +9,8 @@
 import UIKit
 
 class MoviewDetailsTableViewCell: UITableViewCell {
-
+    
+    
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
     override func awakeFromNib() {

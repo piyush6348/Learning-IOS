@@ -9,10 +9,16 @@
 import UIKit
 import SwiftyJSON
 
+let jsonMApping: [Int: String] = [
+    0:"Title",
+    1:"Year",
+    2:"Rated",
+    3:"Released",
+    10:"Plot"
+]
 class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var imgViewPoster: UIImageView!
+    @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
-    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // Don't forget to enter this in IB also
@@ -24,8 +30,7 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
             performSearch(movieIDToSearchFor: imdbID!)
         }
     }
-    var movieDetails: [MovieItem] = [MovieItem]()
-    
+    var json: JSON?
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -34,12 +39,14 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     //MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieDetails.count
+        return jsonMApping.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:MoviewDetailsTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! MoviewDetailsTableViewCell
         
+        cell.label1?.text = jsonMApping[indexPath.row]
+        //cell.label2?.text = (json![jsonMApping[indexPath.row]!]).stringValue
         return cell
     }
     
@@ -54,10 +61,8 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
                 if let dataFetched = data {
                     let responseObtained = response as? HTTPURLResponse
                     if(responseObtained?.statusCode == 200){
-                        let fetchedMovieDetails = self.jsonParsing(obtainedData: dataFetched)
-                        self.movieDetails = [fetchedMovieDetails]
+                        self.jsonParsing(obtainedData: dataFetched)
                         print("Second screen data obtained")
-                        print(fetchedMovieDetails)
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
@@ -68,14 +73,15 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     //MARK: - JSON Handling
-    func jsonParsing(obtainedData: Data) -> MovieItem {
-        let json = JSON(obtainedData)
-        print(json)
+    func jsonParsing(obtainedData: Data){
+        json = JSON(obtainedData)
+        print(json!)
         
         var movieDetail = MovieItem(context: self.context)
-        movieDetail.plot = json["Plot"].stringValue
-        movieDetail.title = json["Title"].stringValue
-        movieDetail.poster = json["Poster"].stringValue
-        return movieDetail
+        movieDetail.plot = json!["Plot"].stringValue
+        movieDetail.title = json!["Title"].stringValue
+        movieDetail.poster = json!["Poster"].stringValue
+        // Save data in db as well
+        // call save data here
     }
 }

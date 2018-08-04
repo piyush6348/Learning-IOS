@@ -46,11 +46,11 @@ class MovieViewController: UITableViewController {
         let typePredicate = NSPredicate(format: "type MATCHES %@", "\(selectedType)")
         //let titlePredicate = NSPredicate(format: "title MATCHES %@", titleToLookFor)
         
-        if let optionalPredicate = titlePredicate {
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [optionalPredicate, typePredicate])
-        }else{
-            request.predicate = typePredicate
-        }
+//        if let optionalPredicate = titlePredicate {
+//            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [optionalPredicate, typePredicate])
+//        }else{
+//            request.predicate = typePredicate
+//        }
         
         do{
             moviesArray = convertToMovieClassArray(movieArray: (try context.fetch(request)))
@@ -205,9 +205,11 @@ extension MovieViewController: UISearchBarDelegate{
             
             if let res = check{
                 if (res.count > 0){
+                    print("loaded from db")
                     loadData(movieSearchedResult: res)
                 }
                 else{
+                    print("loaded from net")
                     self.performSearch(movieTitleToSearchFor: searchBar.text!)
                     DispatchQueue.main.async {
                         searchBar.resignFirstResponder()
@@ -215,6 +217,7 @@ extension MovieViewController: UISearchBarDelegate{
                 }
             }
             else{
+                print("loaded from net")
                 self.performSearch(movieTitleToSearchFor: searchBar.text!)
                 DispatchQueue.main.async {
                     searchBar.resignFirstResponder()
