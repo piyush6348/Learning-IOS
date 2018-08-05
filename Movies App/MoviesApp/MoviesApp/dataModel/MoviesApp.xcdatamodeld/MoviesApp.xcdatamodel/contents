@@ -8,12 +8,13 @@
         <attribute name="year" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MovieItem" representedClassName="MovieItem" syncable="YES" codeGenerationType="class">
+        <attribute name="imdbID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="plot" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="poster" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Movie" positionX="-63" positionY="80" width="128" height="118"/>
-        <element name="MovieItem" positionX="162" positionY="115" width="128" height="88"/>
+        <element name="MovieItem" positionX="162" positionY="115" width="128" height="103"/>
     </elements>
 </model>

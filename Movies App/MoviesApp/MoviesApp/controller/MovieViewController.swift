@@ -27,7 +27,7 @@ class MovieViewController: UITableViewController {
         print(dataFilePath)
     }
     
-    // MARK :- Core Data
+    //MARK: - Core Data
     
     func saveData(reloadAsWell: Bool = true){
         do{
@@ -64,22 +64,7 @@ class MovieViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func checkPresenceOfMovie(imdbID: String) -> Bool {
-        let fetchRequest: NSFetchRequest<Movie> = Movie.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "imdbID = %@", imdbID)
-        
-        do{
-            let obtainedElem = try context.fetch(fetchRequest)
-            print("Obtained element when checked for presence")
-            print(obtainedElem)
-            if(obtainedElem.count > 0){
-                return true
-            }
-        }catch{
-            print("Error while checking presence of data \(error)")
-        }
-        return false
-    }
+
     
     func checkPresenceOfMovie(title: String) -> [Movie]? {
         let fetchRequest: NSFetchRequest<Movie> = Movie.fetchRequest()
@@ -120,7 +105,7 @@ class MovieViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movie = moviesArray[indexPath.row]
         print(movie)
-        if(!checkPresenceOfMovie(imdbID: movie.imdbID)){
+        if(!MoviesApp.checkPresenceOfMovie(imdbID: movie.imdbID, context: context)){
             // add current or clicked movie to 1st table
             // fetch data from 2nd api and show on 2nd screen
             print("not found")

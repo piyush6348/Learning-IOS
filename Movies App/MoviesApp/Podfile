@@ -8,4 +8,5 @@ target 'MoviesApp' do
   # Pods for MoviesApp
 
 pod 'SwiftyJSON'
+pod 'SDWebImage/WebP'
 end

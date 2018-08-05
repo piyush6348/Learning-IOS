@@ -8,13 +8,17 @@
 
 import UIKit
 import SwiftyJSON
+import SDWebImage
 
 let jsonMApping: [Int: String] = [
     0:"Title",
     1:"Year",
     2:"Rated",
     3:"Released",
-    10:"Plot"
+    4:"Runtime",
+    5:"Genre",
+    6:"Plot",
+    7:"Poster"
 ]
 class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var imgView: UIImageView!
@@ -22,12 +26,23 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // Don't forget to enter this in IB also
+    var movieItemArray: [MovieItem] = [MovieItem]()
+    var movieItemKeysArray: [String] = [String]()
     let cellReuseIdentifier = "movieCell"
     var imdbID: String?{
         didSet{
             // perform network call
             print("imdb id obtained " + imdbID!)
-            performSearch(movieIDToSearchFor: imdbID!)
+            
+            if(MoviesApp.checkPresenceOfMovieItem(imdbID: imdbID!, context: context)){
+                // fetch from db and show
+                movieItemArray = MoviesApp.fetchMovieItemFromDb(imdbID: imdbID!, context: context)
+                if(!view.isHidden){
+                    tableView.reloadData()
+                }
+            }else{
+                performSearch(movieIDToSearchFor: imdbID!)
+            }
         }
     }
     var json: JSON?
@@ -35,17 +50,37 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        configTableView()
+        tableView.reloadData()
+        configTableView()
     }
     
     //MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return jsonMApping.count
+        print("--------------------------------------------------------")
+        print("movie item entity details")
+        print(MovieItem.entity().attributesByName.keys)
+        let tempDict = MovieItem.entity().attributesByName.keys
+        movieItemKeysArray.removeAll()
+        movieItemKeysArray = Array(tempDict)
+//        for (key) in tempDict{
+//            print(key)
+//            movieItemKeysArray.append(key)
+//        }
+        return movieItemKeysArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:MoviewDetailsTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! MoviewDetailsTableViewCell
         
-        cell.label1?.text = jsonMApping[indexPath.row]
+        let index = indexPath.row
+        cell.label1?.text = movieItemKeysArray[index]
+        if(movieItemArray.count > 0){
+            //MovieItem.entity().dictionaryWithValues
+            
+            cell.label2?.text = movieItemArray[0].value(forKey: movieItemKeysArray[index]) as! String
+            loadImageInImgView(posterPath: movieItemArray[0].poster!)
+        }
         //cell.label2?.text = (json![jsonMApping[indexPath.row]!]).stringValue
         return cell
     }
@@ -56,6 +91,7 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
         //ops.getData(searchTitle: "man", delegate: self)
         ops.getData(byId: true, imdbID: movieIDToSearchFor, completion: { (data, response, error) in
             if(error != nil){
+                print("didn't get json")
                 print(error!)
             }else{
                 if let dataFetched = data {
@@ -66,6 +102,9 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
+                    }
+                    else{
+                        print("Wrong status code")
                     }
                 }
             }
@@ -81,7 +120,32 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
         movieDetail.plot = json!["Plot"].stringValue
         movieDetail.title = json!["Title"].stringValue
         movieDetail.poster = json!["Poster"].stringValue
+        //loadImageInImgView(posterPath: movieDetail.poster!)
+        movieDetail.imdbID = imdbID
+        movieItemArray.removeAll()
+        movieItemArray.append(movieDetail)
         // Save data in db as well
         // call save data here
+        MoviesApp.saveData(contextToBeSavedIn: context)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    func loadImageInImgView(posterPath: String){
+        do{
+            let url = try URL(string: posterPath)
+            self.imgView.sd_setImage(with: url) { (image, error, cacheType, url) in
+                if(error != nil){
+                    print("Error in loading img \(error)")
+                }
+            }
+        }catch{
+            print("Wrong poster URL")
+        }
+    }
+    //MARK: - Configure tableview
+    func configTableView() {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120.0
     }
 }
