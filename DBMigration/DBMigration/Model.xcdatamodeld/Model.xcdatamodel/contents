@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ClassEntity" representedClassName="ClassEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="classID" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="studList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Student" inverseName="classPresentIn" inverseEntity="Student" syncable="YES"/>
+    </entity>
+    <entity name="Student" representedClassName="Student" syncable="YES" codeGenerationType="class">
+        <attribute name="studentID" attributeType="String" syncable="YES"/>
+        <relationship name="classPresentIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ClassEntity" inverseName="studList" inverseEntity="ClassEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ClassEntity" positionX="-900" positionY="-837" width="128" height="88"/>
+        <element name="Student" positionX="-659" positionY="-754" width="128" height="73"/>
+    </elements>
+</model>

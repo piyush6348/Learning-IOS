@@ -38,7 +38,7 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
                 // fetch from db and show
                 movieItemArray = MoviesApp.fetchMovieItemFromDb(imdbID: imdbID!, context: context)
                 if(!view.isHidden){
-                    tableView.reloadData()
+                    loadAndConfig()
                 }
             }else{
                 performSearch(movieIDToSearchFor: imdbID!)
@@ -50,7 +50,10 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        configTableView()
+        loadAndConfig()
+    }
+    
+    func loadAndConfig() {
         tableView.reloadData()
         configTableView()
     }
@@ -100,7 +103,7 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
                         self.jsonParsing(obtainedData: dataFetched)
                         print("Second screen data obtained")
                         DispatchQueue.main.async {
-                            self.tableView.reloadData()
+                            self.loadAndConfig()
                         }
                     }
                     else{
@@ -128,7 +131,7 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource, UITab
         // call save data here
         MoviesApp.saveData(contextToBeSavedIn: context)
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            self.loadAndConfig()
         }
     }
     func loadImageInImgView(posterPath: String){
