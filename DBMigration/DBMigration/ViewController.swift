@@ -12,17 +12,20 @@ import CoreData
 class ViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         insertIntoDB()
+        print(dataFilePath!)
     }
 
     func insertIntoDB(){
         let classInserted = insertIntoClass()
         let insertedStudent = insertStudent()
         classInserted.addToStudList(insertedStudent)
+        self.saveData()
     }
     func insertIntoClass() -> ClassEntity{
         let classModelObj = ClassEntity(context: context)
