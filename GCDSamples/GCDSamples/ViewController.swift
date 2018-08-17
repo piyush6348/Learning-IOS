@@ -34,11 +34,11 @@ class ViewController: UIViewController {
         
         // concurrentQueues()
         
-         concurrentQueues()
-         if let queue = inactiveQueue {
-            queue.activate()
-         }
-        
+//         concurrentQueues()
+//         if let queue = inactiveQueue {
+//            queue.activate()
+//         }
+//
         
         // queueWithDelay()
         
@@ -177,6 +177,8 @@ class ViewController: UIViewController {
         
         */
         
+        /*
+         
         let tempQueue = DispatchQueue(label: "SerialQwithAsyncWorkObjects", qos: DispatchQoS.default, attributes: [.concurrent , .initiallyInactive])
         
         inactiveQueue = tempQueue
@@ -197,6 +199,8 @@ class ViewController: UIViewController {
                 print("🔷",i)
             }
         }
+        
+        */
     }
     
     

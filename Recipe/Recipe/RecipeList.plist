@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>photoDescription</key>
+		<string>Foam, creamy, brown liquid, on cup.</string>
+		<key>name</key>
+		<string>Cappuccino</string>
+		<key>imageName</key>
+		<string>dish1</string>
+		<key>difficulty</key>
+		<integer>1</integer>
+		<key>prepTime</key>
+		<integer>3</integer>
+		<key>cookTime</key>
+		<integer>5</integer>
+		<key>yield</key>
+		<integer>4</integer>
+		<key>ingredients</key>
+		<array>
+			<string>A shot of espresso</string>
+			<string>2 % millk</string>
+			<string>1/4 cup reduced sodium soy sauce</string>
+		</array>
+		<key>directions</key>
+		<array>
+			<string>Place the milk in a microwave safe cup.</string>
+			<string>Microwave it uncovered for 2 minutes till it&apos;s hot and small bubbles form.</string>
+			<string>Use a metal whisk or spoon to stir it vigorously.</string>
+			<string>Pour the espresso into a mug.</string>
+			<string>Pour the milk into the mug.</string>
+			<string>Ready to serve!</string>
+		</array>
+	</dict>
+	<dict>
+		<key>photoDescription</key>
+		<string>Creamy, cupcakes, chocolate or vanilla icing on top, with heart shape sprinkles.</string>
+		<key>name</key>
+		<string>Cupcakes</string>
+		<key>imageName</key>
+		<string>dish2</string>
+		<key>difficulty</key>
+		<integer>2</integer>
+		<key>prepTime</key>
+		<integer>85</integer>
+		<key>cookTime</key>
+		<integer>30</integer>
+		<key>yield</key>
+		<integer>4</integer>
+		<key>ingredients</key>
+		<array>
+			<string>3 cups of flour</string>
+			<string>half a teaspoon of salt</string>
+			<string>1 cup of butter</string>
+			<string>1.5 cups of sugar</string>
+			<string>4 organic eggs</string>
+			<string>1 teaspoon of vanilla extract</string>
+			<string>2.5 table spoons of lemon zest</string>
+			<string>half a cup of milk</string>
+		</array>
+		<key>directions</key>
+		<array>
+			<string>Preheat oven to 380 degrees fahrenheit</string>
+			<string>Line up 25 cupcake pan cups with paper liners</string>
+			<string>Sift flour and salt into a bowl, add another bowl to beat the butter and sugar with mixer till it becomes fluffy and light.</string>
+			<string>Beat the eggs one at a time, and continue mixing.</string>
+			<string>Mix the vanilla extract and lemon zest in the same bowl.</string>
+			<string>Fill the cupcake liners with batter 3/4</string>
+			<string>Bake in preheated oven for 17 minutes.</string>
+			<string>Let cupcake cool in pans for 8 minutes before removing them.</string>
+			<string>Place icing.</string>
+		</array>
+	</dict>
+	<dict>
+		<key>photoDescription</key>
+		<string>Oval in shape, green avocado, red tomato, crunchy, sprinkles of cheese.</string>
+		<key>name</key>
+		<string>Avocado Tomato Pizza</string>
+		<key>imageName</key>
+		<string>dish3</string>
+		<key>difficulty</key>
+		<integer>4</integer>
+		<key>prepTime</key>
+		<integer>20</integer>
+		<key>cookTime</key>
+		<integer>5</integer>
+		<key>yield</key>
+		<integer>25</integer>
+		<key>ingredients</key>
+		<array>
+			<string>2 green avocados</string>
+			<string>a tablespoon of chopped cilantro</string>
+			<string>tablespoon of lime juice</string>
+			<string>tablespoon of salt</string>
+			<string>1 peeled garlic</string>
+			<string>8 inch pre-baked pizza crust</string>
+			<string>1 tablespoon of organic olive oil</string>
+			<string>1 cup of sliced tomatoes</string>
+			<string>1 cup of shredded pepper jack cheese</string>
+			<string>1 red pepper chopped up</string>
+		</array>
+		<key>directions</key>
+		<array>
+			<string>Preheat oven 450 degrees.</string>
+			<string>Mix the avocados and cilantros together.</string>
+			<string>Puree while adding the table spoon of salt and juice, once done cover it and set it aside.</string>
+			<string>Next slice the garlic clove and rub it on the pizza crust. This gives the pizza some flavor. Next use a brush to brush the crust wth the orgnaic olive oil. </string>
+			<string>Now spread the advocado you mixed over the top of the crush, and arrange the cilantro and tomoatos on top. Lastly sprinkle the cheese and season with any kind of pepper you want.</string>
+			<string>Place the pizza on a baking sheet.</string>
+			<string>Broil for about 5 minutes in the preheated oven, or when you see that the crust loooks toasted. Take it out and EAT!!!</string>
+		</array>
+	</dict>
+	<dict>
+		<key>photoDescription</key>
+		<string>A big stove, with crunchy shrimp, clams, peas, with cilantro on top</string>
+		<key>name</key>
+		<string>Seafood Paella</string>
+		<key>imageName</key>
+		<string>dish4</string>
+		<key>difficulty</key>
+		<integer>5</integer>
+		<key>prepTime</key>
+		<integer>20</integer>
+		<key>cookTime</key>
+		<integer>10</integer>
+		<key>yield</key>
+		<integer>18</integer>
+		<key>ingredients</key>
+		<array>
+			<string>1 onion that is finely chopped in to small pieces.</string>
+			<string>4 tablespoons of organic olive oil</string>
+			<string>2.5 garlic cloves thats crushed to a paste or chopped. This is to provide flavor.</string>
+			<string>2 tomatoes chopped</string>
+			<string>one tablespoon of sugar</string>
+			<string>salt</string>
+			<string>2 tablespoons of paprika</string>
+			<string>saffron threads</string>
+			<string>small squid sliced up</string>
+			<string>jumbo shrimps in shell</string>
+			<string>jumbo mussels</string>
+			<string>cilantro</string>
+			<string>a bag of peas</string>
+			<string>any type of fish</string>
+			<string>jasmine rice</string>
+		</array>
+		<key>directions</key>
+		<array>
+			<string>Fry the onions on paella pan till soft. Stir the garlic and add the tomatos.</string>
+			<string>Add the sugar and salt to taste, and then add in the paprika. Sit well till you see the pan sizzling.</string>
+			<string>Next add the squid and cook for a minute.</string>
+			<string>Add rice and stir well.</string>
+			<string>Add some olive oil (taste better with wine add some)</string>
+			<string>Stir the pan and spread the rice out nice and evenly. Once spread out stop stiring and let the rice cook for 15 minutes.</string>
+			<string>Next lay the shrimps on top of the rice, and after 10 minutes the shrimp should turn pink.</string>
+			<string>Now steam the mussels with water, as they open that means they are cooked. </string>
+			<string>Place mussel on top of the paella, and enjoy!</string>
+		</array>
+	</dict>
+	<dict>
+		<key>photoDescription</key>
+		<string>Green triangular shaped chips</string>
+		<key>name</key>
+		<string>Zucchini Chips</string>
+		<key>imageName</key>
+		<string>dish5</string>
+		<key>difficulty</key>
+		<integer>3</integer>
+		<key>prepTime</key>
+		<integer>20</integer>
+		<key>cookTime</key>
+		<integer>10</integer>
+		<key>yield</key>
+		<integer>18</integer>
+		<key>ingredients</key>
+		<array>
+			<string>Cooking spray so the chips don&apos;t get sticky on the tray</string>
+			<string>Get 3 zucchini&apos;s, green or yellow</string>
+			<string>1 tablespoon of organic olive oil</string>
+			<string>1/4 Any type of cheese</string>
+			<string>1/4 cup of flour</string>
+			<string>1 teaspoon of salt</string>
+			<string>Garlic powder</string>
+			<string>grounded black pepper</string>
+			<string>paprika</string>
+			<string>basil leaves</string>
+		</array>
+		<key>directions</key>
+		<array>
+			<string>Preheat oven to 400 degrees F. Lightly oil a baking sheet or coat with nonstick spray.</string>
+			<string>Slice the zucchini up nicely</string>
+			<string>Add flour into a bowl, mix with zucchini</string>
+			<string>Next add 1 teaspoon of salt, also sprinkle some garlic powder, paprika and black pepper</string>
+			<string>Mix and stir the ingredients together nicely</string>
+			<string>Roll the dough and form an oval shape like a pizza</string>
+			<string>Place in oven for 10 mins or till you see it looks toasted.</string>
+			<string>Serve with any kind of dipping sause.</string>
+		</array>
+	</dict>
+</array>
+</plist>
